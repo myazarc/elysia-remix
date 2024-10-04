@@ -1,5 +1,4 @@
 import { join } from "node:path";
-import staticPlugin from "@elysiajs/static";
 import { type AppLoadContext, createRequestHandler } from "@remix-run/node";
 import { Elysia } from "elysia";
 import type { Context } from "elysia/context";
