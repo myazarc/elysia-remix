@@ -41,20 +41,6 @@ export interface RemixOptions {
 	 * Configure `vite` server in `development` mode
 	 */
 	vite?: InlineConfig;
-
-	/**
-	 * Configure [static plugin](https://elysiajs.com/plugins/static) options in `production` mode
-	 *
-	 * @default
-	 * {
-	 *		assets: clientDirectory,
-	 *		prefix: "/",
-	 *		directive: "immutable",
-	 *		maxAge: 31556952000
-	 * }
-	 */
-	static?: Parameters<typeof staticPlugin>[0];
-
 	/**
 	 * A function that returns the value to use as `context` in route `loader` and
 	 * `action` functions.
