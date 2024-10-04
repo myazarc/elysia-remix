@@ -100,18 +100,13 @@ export async function remix(options?: RemixOptions) {
 	} else {
 		const clientDirectory = join(buildDirectory, "client");
 
-		elysia.use(
-			staticPlugin({
-				assets: clientDirectory,
-				prefix: "/",
-				directive: "immutable",
-				maxAge: 31556952000,
-				alwaysStatic: false,
-				// elysia is so buggy https://github.com/elysiajs/elysia/issues/739
-				noCache: true,
-				...options?.static,
-			}),
-		);
+		const glob = new Bun.Glob(`${clientDirectory}/**`);
+		for (const path of glob.scanSync()) {
+			elysia.get(
+				path.substring(clientDirectory.length), 
+				() => new Response(Bun.file(path))
+			);
+		}
 	}
 
 	elysia.all("*", async function processRemixSSR(context) {
